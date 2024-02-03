@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ 	<meta charset="UTF-8">
+	 <title>Spy Hunt</title>
+	 <meta name="viewport" content= "width=device-width,initial-scale=1.0" />
+<style type="text/css">
+	 	body {
+		 	margin: 0;
+	 		padding: 0;
+	 	}
+	 	.center {
+	 		margin: auto;
+	 	}
+	 	 .nav {
+	 		width: auto;
+	 		height: 50px;
+	 		color: #ffffff;
+	 		background-color: #000000;
+	 		text-align: left;
+	 		font-size: 20px;
+	 		position: relative;
+	 		vertical-align: center;
+	 		margin-bottom: 25px;
+	 		line-height: 50px;
+	 		padding-left: 10px;
+	 	}
+	 	.nav div {
+	 		float: left;
+	 		font-size: 14px;
+	 	}
+	 	.nav .item {
+	 		font-size: 40px;
+	 		margin-left: 4%;
+	 		font-weight: bold;
+	 	}
+	 	.row {
+	 		width: auto;
+	 		clear: both;
+	 		margin-bottom: 5%;
+	 	}
+	 	.btn {
+	 		background-color: #e7e7e7;
+	 		padding: 0%;
+	 		text-align: center;
+	 		font-size: 30px;
+	 		float: left;
+	 		margin: 1px;
+	 		border-radius: 5px;
+	 		border-bottom: 2px solid #000000;
+	 		border-right: 2px solid #000000;
+	 		cursor: pointer;
+	 	}
+	 	 #log {
+	 		color: red;
+	 		margin : 15px;
+	 		padding: 10px;
+	 		font-size : 20px;
+	 		height : 150px;
+	 		overflow : scroll;
+	 		background-color : #e7e7e7;
+	 	}
+	 	.cell, .cell25, .cell30, .cell50, .cell60, .cell75 {
+	 		float: none;
+	 		width: 94%;
+	 		padding: 3%;
+	 	}
+	 	.cell {
+	 		clear: both;
+	 	}
+	 	.half {
+	 		width: 45% !important;
+	 		float: left;
+	 	}
+		.third {
+			width: 35% !important;
+			float: left;
+		}
+		.quarter{
+			width: 18%;
+			float: left;
+		}
+@media all and (min-width: 500px) {
+	.cell {
+		float : left;
+	}
+
+	.cell25 {
+		float: left;
+		width: 19%;
+		padding: 3%;
+	}
+	.cell30 {
+		float: left;
+		width: 24%;
+		padding: 3%;
+	}
+	 .cell40 {
+		float: left;
+		width: 34%;
+		padding: 3%;
+	}
+	.cell50 {
+		float: left;
+		width: 44%;
+		padding: 3%;
+	}
+	.cell60 {
+		float: left;
+		width: 54%;
+		padding: 3%;
+	}
+	.cell75 {
+		float: left;
+		width: 69%;
+		padding: 3%;
+	}
+
+	#spyscreen {
+	 	width: 500px;
+	  	margin: 0px auto;
+	}
+
+	#down {
+		width: 25px;
+		height: 25px;
+		padding: 10px;
+		cursor: pointer;
+		margin-right: 10px;
+	}
+
+	#spy_title {
+		height: 25px;
+		padding: 15px !important;
+	}
+
+	#menu {
+		width: 300px !important;
+		height: 400px !important;
+		margin: 0px auto;
+		border: 3px solid #999999;
+		background-color: #e7e7e7;
+		position: fixed;
+		top: 0px;
+		right: 0px;
+	}
+
+	#instructions {
+		width: 100%;
+	}
+
+	#story {
+		width: 400px;
+		height: 400px;
+		overflow-y: none;
+		margin: 0px auto;
+	}
+
+	#spy_stage {
+		width: 500px !important;
+		margin: 0px auto !important;
+	}
+	#spy_stage1, #agent_log {
+		width: 500px !important;
+	}
+} /* /media */
+	 	#console {
+	 		display : none;
+	 	}
+	 	.con {
+	 		font-size : 30px;
+	 		float : left;
+	 		height : 50px;
+	 	}
+	 	.right {
+	 		float: right;
+	 	}
+	 	.left {
+	 		float: left;
+	 	}
+	 	.clear {
+	 		clear: both;
+	 	}
+	 	
+/* spy hunt styles */
+       .nav1 {
+          background-color: #33aacc;
+          height: 50px;
+       }
+	 	#city {
+	 		height: 250px;
+	 		width: 250px;
+	 		background-color: #000000;
+	 		margin: auto;
+	 	}
+	 	.block {
+	 		width: 44px;
+	 		height: 39px;
+	 		margin: 3px 3px;
+	 		background-color: #33aacc;
+	 		float: left;
+	 		position: relative;
+	 		overflow: hidden;
+	 		text-align: center;
+	 		font-size: 30px;
+	 		line-height: 30px;
+	 		color: white;
+	 		padding-top: 5px;
+	 	}
+	 	.guess {
+	 	   background-color: #000000;
+	 	}
+	 	.spy {
+	 	   border-radius: 50%;
+	 		background-color: #ff0033;
+	 	}
+	 	#menu {
+	 	   position: fixed;
+	 	   top: 0px;
+	 	   left: 0px;
+	 	   z-index: 2;
+	 		font-size: 16px;
+	 		padding: 5% 10%;
+	 		background-color: #ffffff;
+	 		height: 100%;
+	 		width: 85%
+	 	}
+	 	#menu .btn {
+	 		width: 80%;
+	 		font-size: 16px;
+	 		padding: 5%
+	 	}
+	 	#menu h3 {
+	 	   margin: 150px 0px 0px;
+	 	}
+	 	#menu a, #instructions a {
+	 	   position: absolute;
+	 	   top: 15px;
+	 	   right: 25px;
+	 	}
+	 	#instructions {
+	 	   position: fixed;
+	 	   top: 0px;
+	 	   left: 0px;
+	 	   background-color: #000000;
+	 	   color: #ffffff;
+	 	   z-index: 2;
+	 	   display: none;
+	 	   height: 100%;
+	 	   padding: 10px;
+	 	   overflow-y: scroll;
+	 	}
+	 	.select {
+	 	   background-color: #33aacc;
+	 	}
+	 	#agent_log {
+	 	   height: 150px;
+	 	   overflow-y: scroll;
+	 	}
+	 	a {
+	 		cursor: pointer;
+	 	}
+
+</style>
+</head>
+<body> 
+
+<div  class="nav1">
+    <div id="spy_title" style="padding: 5%; font-weight: bold; float: left;" >5X- Spy Hunt</div>
+    <div  id="down" class="btn cell40 quarter right" onclick= "spy.menu();"> &equiv;
+			</div>
+</div>
+<div id="spyscreen">
+	<div  id="menu"  class="row cell75 center" style="display: none;">
+		<a onclick= "spy.menu();">X</a>
+		<br style= "clear: both;" />
+		<div class="btn" onclick= "spy.init ();">New Game</div> 
+		<div class="btn" onclick="spy.instr(1);">Instructions</div>
+		<br />
+		<h3>Difficulty</h3>
+		 <div  id="dif0" class="btn center select" onclick= "spy.set_diff(0)">Easy (15 Agents)</div> <br style = "clear: both;" />
+		 <div  id="dif1" class="btn center" onclick= "spy.set_diff(1)" >Medium (10 Agents)</div> <br style = "clear: both;" />
+		 <div  id="dif2" class="btn center" onclick= "spy.set_diff(2)" >Hard (7 Agents)</div>
+		 
+	</div>
+	<div  id="instructions">
+	<a onclick= "spy.instr (0);">X</a>
+		<div id="story">
+		   <h3>Story</h3>
+		   <p>
+		      You are a CIA Investigator who has received intelligence that three spies are operating somewhere in the city. You have been tasked with capturing the spies, but you have a limited number of agents you can send out to find them. Your agents will report their findings if they do not find a spy in that block of the city.
+		   </p>
+		   <h3>How to Play</h3>
+		   <p>
+		      Click on a square to send an agent to that city block. If a spy is found in that square it will display a red circle. If not you will receive a data update from your agent. These clues will help you discover the location of the remaining spies. If you find all three spies before you run out of agents, you win the game!
+		   </p>
+	   </div>
+	</div>
+<!-- game screen -->
+	
+	<div id="spy_stage" class="center row" style="width: 95%">
+		<div id="spy_stage1" class="cell60 center">
+			<div  id="city">
+			</div> 
+		</div>
+		<br style="clear: both;" />
+		<b>Agent Reports:</b>
+		<br style="clear: both;" />
+		<div id = "agent_log" class="cell40 center"></div>
+	</div>
+</div>
+<div id="console"  class="row cell75">
+<div  id="log"></div>
+<script>
+// andi
+// Written by Kendall Purser
+// 2014.06.01
+
+
+// ***get function***
+	var a = { 
+		get : function (id) {
+		var temp_id = document.getElementById(id);
+		return temp_id;
+		},
+// ***log function***
+		log : function (msg) {
+			a.show("console");
+			var temp = a.get("log").innerHTML;
+			a.get("log").innerHTML = msg + "<br /> " + temp;
+		} ,
+
+// ***css interactoons***
+		css : function (id,key_val) {
+				for (i in key_val) {
+					a.get(id).style[i] = key_val[i];
+				}
+		},
+		show : function (id) {
+			a.css(id, {"display":"block"});
+		},
+		hide : function (id) {
+			 a.css(id, {"display":"none"});
+		} 
+	};
+	 // ***browser errors***
+	window.onerror = function ( msg, url, num, col, obj) {
+		a.log("Error- " + msg + "(" + num + ", " + col + ") <br /> " + url + " " + obj);
+	};
+
+		</script>
+<script>
+	var spy = {
+	
+	   // basic variables
+	   agent_log : [ ],
+	   agent_count: 1,
+	   level: [15,10,7],
+	   diff : 0,
+	   spies : [0,0,0],
+	   captured: [0,0,0],
+	   end : 0,
+	   grid : [
+	      0,0,0,0,0,
+	      0,0,0,0,0,
+	      0,0,0,0,0,
+	      0,0,0,0,0,
+	      0,0,0,0,0
+	   ],
+	   tmpl : "<div class='{{class}}' onclick='{{fn}}'>{{num}}</div>",
+	   
+	   // menu functions
+		menu_vis : 0,
+		menu : function () {
+			if (spy.menu_vis === 0) {
+				a.show("menu");
+				spy.menu_vis = 1;
+			} else {
+				a.hide("menu");
+				spy.menu_vis = 0;
+			}
+		},
+		
+		// game controls
+		init : function () {
+		   // close menu
+		   spy.menu ();
+		   // reset vars
+		   spy.agent_log = [ ];
+		   spy.end = 0;
+		   spy.agent_count = 1;
+		   for (i in spy.grid) {
+		      spy.grid[i] = 0;
+		   }
+		   spy.spies = [ ];
+		   spy.captured = [0,0,0];
+		   
+		   // pick spies location
+		   while (spy.spies.length < 3) {
+		      var rand = Math.floor ( Math.random() * spy.grid.length);
+		         if (spy.spies.indexOf (rand) === -1) {
+		            spy.spies.push(rand);
+		         }
+		   }
+		   
+		   // update ui
+		   spy.update_ui ();
+		},
+		
+		guess: function(x) {
+		   // mark the square and up the count
+		   if (spy.agent_count < spy.level [spy.diff] + 1) {
+			   spy.grid[x] = spy.agent_count;
+			   spy.agent_count +=1;
+			   if (spy.test(x) === true) {
+			      spy.agent_log.push("Spy Captured");
+			      spy.captured [spy.spies.indexOf (x)] =1;
+			   } else {
+			      spy.agent_log.push (spy.find(x));
+			   }
+			}
+			// win condition
+			if (spy.captured.join (",") === "1,1,1") {
+			   spy.agent_log.push ("You win!");
+			   	spy.update_ui ();
+			   	spy.end =1;
+			}
+			if (spy.captured !== [1,1,1] && spy.agent_count >= spy.level[spy.diff] + 1) {       
+			   spy.agent_log.push ("You lose. Sorry, try again!");
+			   spy.update_ui ();
+			   spy.end = 1;
+			}
+			spy.update_ui ();
+		},
+		find: function (loc) {
+		
+		   // return direction of each uncaptured spy
+		   var agent = spy.loc_on (loc);
+		   var spy_loc  = [spy.loc_on (spy.spies [0]), spy.loc_on (spy.spies [1]), spy.loc_on (spy.spies [2])];
+		   
+		   // compare if not captured
+		   var report =["","",""];
+		   for (m = 0; m < spy_loc.length; m += 1) {
+		      
+		      if (spy.captured[m] !== 1) {
+		         if (agent[1] > spy_loc[m][1]) {
+		            report[m] += "NORTH";
+		         }
+		         if (agent[1] < spy_loc[m][1]){
+		            report[m] += "SOUTH";
+		         }
+		         if (agent[0] > spy_loc[m][0]){
+		            report[m] += "WEST";
+		         }
+		         if (agent[0] < spy_loc[m][0]){
+		            report[m] += "EAST";
+		         }
+		      } else {
+		         report [m] += "CAPTURED";
+		      }
+		   }
+		   return (report.join (", "));
+		},
+		loc_on: function (find) {
+		   // find x, y location of spy or agent
+		   var  xy = [ ],
+		   row = [
+		      [0,1,2,3,4], 
+		      [5,6,7,8,9],
+		      [10,11,12,13,14],
+		      [15,16,17,18,19],
+		      [20,21,22,23,24]];
+		      // find in row for y and use index for x
+		   for (l in row) {
+		      if (row[l].indexOf (find) != -1) {
+		         xy.push(row[l].indexOf (find));
+		         xy.push (l);
+		      }
+		   }
+		   return xy;
+		},
+		
+		update_ui : function () {
+		   if (spy.end !== 1) {
+		   var output = "";
+		   for (i = 0; i < spy.grid.length; i += 1) {
+		      var test = spy.test (i);
+		      var tmp;
+		      
+		      if (spy.grid[i] === 0) {
+		         tmp = spy.tmpl.replace ("{{class}}","block");
+		         tmp = tmp.replace ("{{fn}}","spy.guess("+i+");");
+		         tmp = tmp.replace ("{{num}}","");
+		         output += tmp;
+		      }
+		      if (spy.grid[i] > 0 && test === true) {
+		         tmp = spy.tmpl.replace ("{{class}}","block spy");
+		         tmp =tmp.replace ("{{fn}}","");
+		         tmp = tmp.replace ("{{num}}",spy.grid[i]);
+		         output += tmp;
+		      }
+		      if (spy.grid[i] > 0 && test === false) {
+		         tmp = spy.tmpl.replace ("{{class}}","block guess");
+		         tmp =tmp.replace ("{{fn}}","");
+		         tmp = tmp.replace ("{{num}}", spy.grid[i]);
+		         output += tmp;
+		      }
+		   }
+		   a.get("city").innerHTML = output;
+		   
+		   // update agent log
+		   var tmp_log = [ ];
+		   for (k = 0; k < spy.agent_log.length; k += 1) {
+		      tmp_log.push ((k+1) +": " + spy.agent_log [k]);
+		   }
+		   tmp_log = tmp_log.reverse ();
+		   a.get("agent_log").innerHTML = tmp_log.join ("<br />");
+		   }
+		},
+		
+		instr : function (x) {
+		   if (x === 1) {
+		      a.show("instructions");
+		   } else {
+		      a.hide("instructions");
+		   }
+		},
+		set_diff : function (num) {
+		   var sel = "btn select",
+		   no_sel = "btn";
+		   spy.diff = num;
+		   
+		   // clear shading
+		   a.get ("dif0").className = no_sel;
+		   a.get ("dif1").className = no_sel;
+		   a.get ("dif2").className = no_sel;
+		   
+		   // shade selected difficulty
+		   a.get ("dif"+num).className = sel;
+		},
+	   test: function (num) {
+	      // does this square contain a spy?
+	      var count = 0;
+	      for (j in spy.spies) {
+	         if (spy.spies[j] === num) {
+	            count += 1;
+	         }
+	      }
+	      if (count > 0) {
+	         return true;
+	      } else {
+	         return false;
+	      }
+	   }
+	};
+//	spy.init();
+	spy.menu ();
+</script>
+	 </body>
+ </html>
