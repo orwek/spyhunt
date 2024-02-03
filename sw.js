@@ -1,3 +1,18 @@
 self.addEventListener("install", e => {
-    console.log("Install!");
+   // console.log("Install!");
+    e.waitUntil(
+        caches.open("static").then(cache => {
+            return cache.addAll(["./"]);
+        })
+    );
+});
+
+self.addEventListener("fetch", e => {
+   // console.log("Intercepting fetch rquest for: ${e.request.url}");
+        e.respondWith(
+            caches.match(e.request).then(response => {
+                return response || fetch(e.request);
+            })
+        );
+
 });
