@@ -4,4 +4,16 @@
   "start_url" : ".",
   "background_color" : "#8FD9ED",
   "theme_color" : "#33aacc",
+  "display" : "standalone",
+  "icons" : [
+      {
+        "src" : "spyhunt192.png",
+        "sizes" : "192x192",
+        "type" : "image/png"
+      },{
+        "src" : "spyhunt512.png",
+        "sizes" : "512x512",
+        "type" : "image/png"
+      }
+  ]
 }
