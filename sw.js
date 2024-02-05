@@ -1,18 +1,27 @@
-self.addEventListener("install", e => {
-   // console.log("Install!");
-    e.waitUntil(
-        caches.open("static").then(cache => {
-            return cache.addAll(["./"]);
-        })
-    );
+var app = "app";
+var assets = [
+      "/",
+      "/index.html",
+      "/manifest.json",
+      "/spyhunt_192.png",
+      "/spyhunt_512.png",
+      "/spyhunt_192_apple.png",
+      "sw.js"
+   ];
+
+
+self.addEventListener("install", installEvent => {
+  installEvent.waitUntil(
+    caches.open(app).then(cache => {
+      cache.addAll(assets)
+    })
+  );
 });
 
-self.addEventListener("fetch", e => {
-   // console.log("Intercepting fetch rquest for: ${e.request.url}");
-        e.respondWith(
-            caches.match(e.request).then(response => {
-                return response || fetch(e.request);
-            })
-        );
-
+self.addEventListener("fetch", fetchEvent => {
+  fetchEvent.respondWith(
+    caches.match(fetchEvent.request).then(res => {
+      return res || fetch(fetchEvent.request)
+    })
+  );
 });
