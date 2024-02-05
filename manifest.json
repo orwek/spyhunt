@@ -11,6 +11,11 @@
         "sizes" : "192x192",
         "type" : "image/png"
       },{
+        "src" : "spyhunt_192_apple.png",
+        "sizes" : "192x192",
+        "type" : "image/png"
+        "purpose" : "maskable"
+      },{
         "src" : "spyhunt_512.png",
         "sizes" : "512x512",
         "type" : "image/png"
