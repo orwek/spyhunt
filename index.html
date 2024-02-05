@@ -5,10 +5,23 @@
 	<title>Spy Hunt</title>
 	<meta name="viewport" content= "width=device-width,initial-scale=1.0" />
 	<link rel="icon" type="image/png" href="spyhunt_192.png" />
+	 
 	 <!-- PWA Stuff -->
 	<link rel="manifest" href="manifest.json" />
 	<link rel="apple-touch-icon" src="spyhunt_192_apple.png" />
 	<meta name="theme-color" content="#8FD9ED" />
+	 <script>
+		if ("serviceWorker" in navigator) {
+		  window.addEventListener("load", function() {
+		    navigator.serviceWorker
+		      .register("/serviceWorker.js")
+		      .then(res => console.log("service worker registered"))
+		      .catch(err => console.log("service worker not registered", err))
+		  })
+		}
+	 </script>
+	 <!-- End PWA Stuff -->
+	 
 <style type="text/css">
 	 	body {
 		 	margin: 0;
