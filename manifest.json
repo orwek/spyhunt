@@ -1,10 +1,15 @@
 {
   "name" : "Spyhunt",
   "short_name" : "Spyhunt",
-  "start_url" : ".",
+  "start_url" : "https://owrek.github.io/spyhunt/",
+  "scope" : "/",
+  "description" : "A band of spies has moved into the city and it is up to you to find them.",
   "background_color" : "#8FD9ED",
   "theme_color" : "#33aacc",
   "display" : "standalone",
+  "categories": [
+        "games"
+    ],
   "icons" : [
       {
         "src" : "spyhunt_192_apple.png",
