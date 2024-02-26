@@ -13,7 +13,7 @@ self.addEventListener("install", installEvent => {
       "/spyhunt_192.png",
       "/spyhunt_512.png",
       "/spyhunt_192_apple.png",
-      "sw.js"
+      "/sw.js"
    ])
     })
   );
