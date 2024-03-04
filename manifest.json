@@ -1,7 +1,7 @@
 {
   "name" : "Spyhunt",
   "short_name" : "Spyhunt",
-  "start_url" : "https://owrek.github.io/spyhunt/",
+  "start_url" : "https://owrek.github.io/spyhunt/index.html",
   "scope" : "/",
   "description" : "A band of spies has moved into the city and it is up to you to find them.",
   "background_color" : "#8FD9ED",
