@@ -2,19 +2,21 @@
 // Written by Kendall Purser
 // February 2024
 
-// Install Script
-self.addEventListener("install", installEvent => {
-  installEvent.waitUntil(
-    caches.open("spyhunt").then(cache => {
-      cache.addAll([
+const cache_name = "spyhunt";
+const urls_to_cache = [
       "/",
       "/index.html",
       "/manifest.json",
       "/spyhunt_192.png",
       "/spyhunt_512.png",
-      "/spyhunt_192_apple.png",
-      "/sw.js"
-   ])
+      "/spyhunt_192_apple.png"
+  ];
+
+// Install Script
+self.addEventListener("install", installEvent => {
+  installEvent.waitUntil(
+    caches.open(cache_name).then(cache => {
+      cache.addAll(urls_to_cache);
     })
   );
 });
