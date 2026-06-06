@@ -19,6 +19,7 @@ self.addEventListener("install", installEvent => {
       cache.addAll(urls_to_cache);
     })
   );
+  self.skipWaiting(); // Activate Immediately
 });
 
 // Activation Script
